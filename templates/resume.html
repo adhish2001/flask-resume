@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume - {{ resume.name }}</title>
+    <style>
+      /* Add your CSS styling here */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{ resume.name }}</h1>
+      <p>{{ resume.address }}</p>
+      <p>Phone: {{ resume.phone }}</p>
+      <p>Email: {{ resume.email }}</p>
+      <p>LinkedIn: <a href="{{ resume.linkedin }}">{{ resume.linkedin }}</a></p>
+      <p>GitHub: <a href="{{ resume.github }}">{{ resume.github }}</a></p>
+
+      <h2>Education</h2>
+      <p>
+        {{ resume.education.degree }} at {{ resume.education.university }} ({{
+        resume.education.dates }})
+      </p>
+
+      <h2>Experience</h2>
+      {% for experience in resume.experience %}
+      <h3>{{ experience.company }}</h3>
+      <p>
+        {{ experience.position }}, {{ experience.location }} ({{
+        experience.dates }})
+      </p>
+      <ul>
+        {% for highlight in experience.highlights %}
+        <li>{{ highlight }}</li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+
+      <h2>Projects</h2>
+      {% for project in resume.projects %}
+      <h3>{{ project.name }} | {{ project.technologies }}</h3>
+      <p>{{ project.description }}</p>
+      {% endfor %}
+
+      <h2>Technical Skills</h2>
+      <p>Languages: {{ resume.technical_skills.languages }}</p>
+      <p>Developer Tools: {{ resume.technical_skills.developer_tools }}</p>
+      <p>Technologies/Frameworks: {{ resume.technical_skills.technologies }}</p>
+
+      <h2>Certificates/Screenings</h2>
+      <ul>
+        {% for certificate in resume.certificates %}
+        <li>{{ certificate }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
